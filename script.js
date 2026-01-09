@@ -484,7 +484,8 @@ document.getElementById('veto-btn').addEventListener('click', () => {
     // 3. Keep crate opened (it's burned)
     // 4. Update UI
     
-    if (pickIndex <= 0) return; // Can't veto if no picks made
+    // Prevent double veto or veto without a pick
+    if (pickIndex <= 0 || !lastPickedCrate) return;
 
     // If summary pending, cancel it
     if (summaryTimeout) {
@@ -508,6 +509,10 @@ document.getElementById('veto-btn').addEventListener('click', () => {
         lastPickedCrate.style.color = "#ff9999";
         // Optional: Strike through text? 
         // lastPickedCrate.style.textDecoration = "line-through";
+        
+        // Disable interaction with this specific revoked crate is handled by 'opened' class check in openCrate,
+        // but we'll clear the reference so we can't veto it again.
+        lastPickedCrate = null;
     }
 
     // Re-enable draft if it was finished
