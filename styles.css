@@ -1,0 +1,260 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #2b2b2b;
+    color: #e0e0e0;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    color: #cdb896;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 2px solid #cdb896;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    width: 100%;
+    max-width: 1400px;
+}
+
+.picker {
+    background: #383838;
+    padding: 20px;
+    border: 1px solid #5a5a5a;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.phase-layout {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    gap: 40px;
+    width: 100%;
+    flex-wrap: wrap; 
+}
+
+.wheel-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 0 0 auto;
+}
+
+.results-section {
+    flex: 1;
+    min-width: 300px;
+    max-width: 500px;
+    background: #2b2b2b;
+    padding: 20px;
+    border: 2px solid #5a5a5a;
+    border-radius: 4px;
+    max-height: 700px;
+    overflow-y: auto;
+}
+
+.results-section h3 {
+    color: #cdb896;
+    border-bottom: 1px solid #5a5a5a;
+    margin-top: 0;
+    padding-bottom: 10px;
+}
+
+/* Styles for buttons inside layout */
+.spin-btn, .action-btn {
+    margin-top: 20px;
+    font-size: 1.2em;
+    padding: 15px 30px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.picker h2 {
+    margin-bottom: 15px;
+    font-size: 1.5em;
+    color: #cdb896;
+    text-transform: uppercase;
+    border-bottom: 1px dashed #666;
+    padding-bottom: 5px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Hidden Utility */
+.hidden {
+    display: none !important;
+}
+
+/* Canvas Wheel Styles */
+canvas {
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(0,0,0,0.8);
+    background: #2b2b2b;
+    margin: 20px auto;
+}
+
+/* Controls and Inputs */
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 400px;
+}
+
+input, button {
+    padding: 10px;
+    font-family: inherit;
+    border: 2px solid #5a5a5a;
+    background: #444;
+    color: #fff;
+    border-radius: 4px;
+}
+
+button {
+    background: #6e8b61;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+    text-transform: uppercase;
+}
+
+button:hover {
+    background: #8b3837;
+}
+
+button:disabled {
+    background: #555;
+    cursor: not-allowed;
+}
+
+.player-list ul, .results-list ul {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+}
+
+.player-list li, .results-list li {
+    background: #333;
+    margin: 5px 0;
+    padding: 10px;
+    border-left: 4px solid #cdb896;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.remove-btn {
+    background: #8b3837;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    font-size: 0.8em;
+    margin-left: 10px;
+}
+
+.phase-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.current-turn {
+    background: #8b3837;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+    font-weight: bold;
+    border: 2px solid #cdb896;
+}
+
+.flag-preview {
+    width: 30px;
+    height: 20px;
+    object-fit: cover;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+/* Mystery Crates Styles */
+.crate-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 15px;
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.crate {
+    background: #5d4037; /* Wood brown */
+    border: 4px solid #3e2723;
+    color: #cdb896;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    font-weight: bold;
+    cursor: pointer;
+    position: relative;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.5), 5px 5px 10px rgba(0,0,0,0.5);
+    transition: transform 0.2s, background 0.3s;
+    text-shadow: 1px 1px 2px black;
+}
+
+.crate::before {
+    content: "TOP SECRET";
+    position: absolute;
+    font-size: 10px;
+    top: 5px;
+    opacity: 0.5;
+    transform: rotate(-15deg);
+    border: 1px solid #cdb896;
+    padding: 2px;
+}
+
+.crate:hover {
+    transform: scale(1.05);
+    background: #6d4c41;
+}
+
+.crate.opened {
+    background: #2e7d32; /* Green for success/revealed */
+    cursor: default;
+    transform: none;
+    font-size: 0.8em;
+    text-align: center;
+    padding: 5px;
+    border-color: #1b5e20;
+}
+
+.crate.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: #333;
+}
+
+/* Ensure buttons inside the flex container behave nicely */
+.selection-area button {
+    height: auto; /* Allow stretching */
+}
+

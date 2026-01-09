@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOI4 Country Picker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>HOI4 Country Selection</h1>
+    <div class="container">
+        <!-- Phase 1: Setup -->
+        <div id="setup-phase" class="picker phase-container">
+            <h2>Mission Briefing (Setup)</h2>
+            <div class="controls">
+                <label>
+                    Picks per Player: 
+                    <input type="number" id="picks-input" value="3" min="1" max="10">
+                </label>
+                <div style="display: flex; gap: 5px;">
+                    <input type="text" id="new-player-name" placeholder="Enter Recruit Name">
+                    <button id="add-player-btn">Add</button>
+                </div>
+                <div class="player-list">
+                    <h3>Recruits:</h3>
+                    <ul id="recruit-list">
+                        <!-- Players go here -->
+                    </ul>
+                </div>
+
+                <div class="country-management" style="margin-top: 20px; border-top: 1px solid #5a5a5a; padding-top: 20px;">
+                    <h3>Strategic Targets (Countries):</h3>
+                    <div style="display: flex; gap: 5px; margin-bottom: 10px;">
+                        <input type="text" id="new-country-name" placeholder="Country Name">
+                        <input type="text" id="new-country-code" placeholder="ISO Code (e.g. 'us')" style="width: 80px;">
+                        <button id="add-country-btn">Add Data</button>
+                    </div>
+                    <ul id="country-list" style="max-height: 200px; overflow-y: auto; background: #333; padding: 10px; list-style: none;">
+                        <!-- Countries go here -->
+                    </ul>
+                </div>
+
+                <button id="start-btn" style="margin-top: 20px;">Commence Operation</button>
+            </div>
+        </div>
+
+        <!-- Phase 2: Pick Order -->
+        <div id="order-phase" class="picker phase-container hidden">
+            <h2>Determine Pick Order</h2>
+            
+            <div class="phase-layout">
+                <div class="wheel-section">
+                    <canvas id="order-wheel" width="500" height="500"></canvas>
+                    <button id="spin-order-btn" class="spin-btn">SPIN THE WHEEL</button>
+                    <button id="to-country-phase-btn" class="hidden action-btn">Proceed to Country Selection</button>
+                </div>
+                
+                <div class="results-section">
+                    <h3>Established Order:</h3>
+                    <ul id="order-list"></ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phase 3: Country Selection -->
+        <div id="country-phase" class="picker phase-container hidden">
+            <h2>Country Requisition</h2>
+            
+            <div class="phase-layout">
+                <div class="selection-area" style="flex: 2;">
+                    <!-- Controls Bar -->
+                    <div style="display: flex; gap: 15px; margin-bottom: 15px;">
+                        <div class="current-turn" id="current-picker-display" style="margin-bottom: 0; flex-grow: 1; display: flex; align-items: center; justify-content: center;">Current Picker: ???</div>
+                        <button id="veto-btn" class="action-btn" style="background: #8b3837; font-size: 1.2em; font-weight: bold; white-space: nowrap; border: 2px solid #cdb896; color: white;">DECLARE INVALID</button>
+                    </div>
+                    
+                    <!-- Old Wheel (Hidden) -->
+                    <canvas id="country-wheel" width="500" height="500" class="hidden"></canvas>
+                    <button id="spin-country-btn" class="spin-btn hidden">DRAFT COUNTRY</button>
+
+                    <!-- New Box Grid -->
+                    <div id="crate-grid" class="crate-grid"></div>
+                </div>
+                
+                <div class="results-section" style="flex: 1;">
+                    <h3>Assignments:</h3>
+                    <div id="assignments-container" style="display: flex; flex-direction: column; gap: 10px;">
+                        <!-- Assignments go here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phase 4: Final Summary -->
+        <div id="summary-phase" class="picker phase-container hidden">
+            <h2>Operation Summary: Final Assignments</h2>
+            <div id="final-summary-container" style="width: 100%; display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+                <!-- Final cards go here -->
+            </div>
+            <button id="restart-btn" class="action-btn" style="margin-top: 30px;">Draft Again</button>
+        </div>
+    </div>
+
+    <script src="countries.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
